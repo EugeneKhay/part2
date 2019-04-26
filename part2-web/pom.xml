@@ -77,6 +77,16 @@
          <scope>provided</scope>
       </dependency>
 
+      <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+      <dependency>
+         <groupId>javax</groupId>
+         <artifactId>javaee-api</artifactId>
+         <version>8.0</version>
+         <scope>provided</scope>
+      </dependency>
+
+
+
        <!-- JSR-303 (Bean Validation) Implementation -->
        <!-- Provides portable constraints such as @Email -->
        <!-- Hibernate Validator is shipped in JBoss WildFly -->
@@ -91,6 +101,16 @@
                </exclusion>
            </exclusions>
        </dependency>
+       <dependency>
+           <groupId>javax</groupId>
+           <artifactId>javaee-api</artifactId>
+           <version>8.0</version>
+       </dependency>
+      <dependency>
+         <groupId>org.jboss.ejb3</groupId>
+         <artifactId>jboss-ejb3-ext-api</artifactId>
+         <version>2.3.0.Final</version>
+      </dependency>
 
    </dependencies>
 
