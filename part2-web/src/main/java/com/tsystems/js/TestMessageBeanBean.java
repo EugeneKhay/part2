@@ -8,6 +8,55 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import java.util.List;
+
+
+@MessageDriven(name = "Listener1", activationConfig = {
+        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "java:/jms/queue/test"),
+        @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")})
+public class TestMessageBeanBean implements MessageListener {
+
+    private static final String REST_URI = "http://localhost:8081";
+
+    @Override
+    public void onMessage(Message message) {
+        try {
+            System.out.println(getClass().getSimpleName() + " >>>>>>>> " + message.getBody(String.class));
+
+            List<Product> products = RestJerseyClient.getProductList();
+
+            System.out.println(products);
+
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //@ResourceAdapter("activemq-rar-5.15.9.rar")
 //@MessageDriven(activationConfig = {
@@ -47,26 +96,6 @@ import javax.jms.TextMessage;
 //        System.out.println("WELL");
 //    }
 //}
-
-@MessageDriven(name = "Listener1", activationConfig = {
-        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "java:/jms/queue/test"),
-        @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")})
-public class TestMessageBeanBean implements MessageListener {
-
-    @Override
-    public void onMessage(Message message) {
-        try {
-            System.out.println(getClass().getSimpleName() + " >>>>>>>> " + message.getBody(String.class));
-
-
-
-
-        } catch (JMSException e) {
-            e.printStackTrace();
-        }
-    }
-
-}
 
 
 
